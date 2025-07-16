@@ -1,0 +1,4 @@
+.gitattributes Unity
+
+Assets/**/*.cs linguist-detectable=true
+* linguist-detectable=false
