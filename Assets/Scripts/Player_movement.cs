@@ -6,16 +6,16 @@ using Vector3 = UnityEngine.Vector3;
 public class Player_movement : MonoBehaviour
 {
     public float MoveSpeed = 10f;
-    public float ExtraSpeed;
     public float RotationSpeed = 75f;
 
     private float HorizontalInput;
     private float VerticalInput;
-    private bool _isRunning;
 
     public GameObject Bullet;
     public float BulletSpeed = 10f;
     private bool _isShooting;
+
+
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -30,21 +30,36 @@ public class Player_movement : MonoBehaviour
         HorizontalInput = Input.GetAxisRaw("Horizontal") * RotationSpeed;
         VerticalInput = Input.GetAxisRaw("Vertical") * MoveSpeed;
 
-        this.transform.Translate(Vector3.forward * VerticalInput * Time.deltaTime * ExtraSpeed);
+        this.transform.Translate(Vector3.forward * VerticalInput * Time.deltaTime);
         this.transform.Rotate(Vector3.up * HorizontalInput * Time.deltaTime);
 
-        _isRunning = Input.GetKey(KeyCode.J);
 
 
-        _isShooting |= Input.GetKeyDown("Space");
+        _isShooting |= Input.GetKeyDown(KeyCode.Space);
 
     }
 
     void FixedUpdate()
     {
-        ExtraSpeed = _isRunning ? 1.5f : 1;
+        if (_isShooting)
+        {
+            GameObject newBullet = Instantiate(Bullet, this.transform.position + new Vector3(0, 0, 1.5f), this.transform.rotation);
+
+            Rigidbody BulletRB = newBullet.GetComponent<Rigidbody>();
+
+            BulletRB.linearVelocity = this.transform.forward * BulletSpeed;
+        }
+
+        _isShooting = false;
 
     }
+
+
+   
+
+
+
+
 
 
 
