@@ -17,6 +17,28 @@ public class Enemy_Behaviour : MonoBehaviour
 
     private bool _isChasingPlayer;
 
+    private int _lives = 3;
+    public int enemyLives
+    {
+        get { return _lives; }
+        private set
+        {
+            _lives = value;
+
+            if (_lives <= 0)
+            {
+                Destroy(this.gameObject);
+                Debug.Log("Enemy Down");
+            }
+        }
+
+
+    }
+
+
+
+
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -68,6 +90,16 @@ public class Enemy_Behaviour : MonoBehaviour
             _isChasingPlayer = true;
             _agent.destination = Player.position;
             Debug.Log("Enemy Detected");
+        }
+    }
+
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.name == "Bullet(clone)")
+        {
+            _lives -= 1;
+            Debug.Log("Critical Hit");
         }
     }
 }

@@ -43,7 +43,7 @@ public class Player_movement : MonoBehaviour
     {
         if (_isShooting)
         {
-            GameObject newBullet = Instantiate(Bullet, this.transform.position + new Vector3(0, 0, 1.5f), this.transform.rotation);
+            GameObject newBullet = Instantiate(Bullet, this.transform.position + new Vector3(0, 0, 1), this.transform.rotation);
 
             Rigidbody BulletRB = newBullet.GetComponent<Rigidbody>();
 
@@ -55,7 +55,7 @@ public class Player_movement : MonoBehaviour
     }
 
 
-   
+
 
 
 
