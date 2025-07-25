@@ -17,10 +17,11 @@ public class Enemy_Behaviour : MonoBehaviour
 
     private bool _isChasingPlayer;
 
-    private int _lives = 3;
+    private int _lives = 4;
     public int enemyLives
     {
         get { return _lives; }
+
         private set
         {
             _lives = value;
@@ -32,10 +33,7 @@ public class Enemy_Behaviour : MonoBehaviour
             }
         }
 
-
     }
-
-
 
 
 
@@ -96,9 +94,9 @@ public class Enemy_Behaviour : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.name == "Bullet(clone)")
+        if (collision.gameObject.name == "Bullet(Clone)")
         {
-            _lives -= 1;
+            enemyLives -= 1;
             Debug.Log("Critical Hit");
         }
     }
